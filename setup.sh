@@ -55,7 +55,6 @@ export NVM_DIR="$HOME/.nvm"
 nvm install 24
 nvm use 24
 nvm alias default 24
-
 echo "✅ Node.js version: $(node -v)"
 echo "✅ npm version: $(npm -v)"
 sudo apt update
@@ -79,8 +78,6 @@ sudo apt install -y \
 
 sudo usermod -aG docker $USER
 
-echo "✅ Docker installed. Run 'newgrp docker' or logout/login to use docker without sudo"
-
 curl -Lo go.tar.gz https://go.dev/dl/go1.23.4.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go
 sudo tar -C /usr/local -xzf go.tar.gz
@@ -94,9 +91,6 @@ export GOPATH=\$HOME/go
 export PATH=\$PATH:\$GOPATH/bin
 EOF
 
-echo "✅ Go version: $(go version)"
-
-echo "⚡ Installing uv (Astral)..."
 curl -LsSf https://astral.sh/uv/install.sh | sh
 export PATH="$HOME/.local/bin:$PATH"
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
@@ -108,8 +102,6 @@ export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 echo 'export DENO_INSTALL="$HOME/.deno"' >> ~/.bashrc
 echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> ~/.bashrc
-
-echo "✅ Deno version: $(~/.deno/bin/deno --version)"
 
 curl -fsSL https://bun.sh/install | bash
 
