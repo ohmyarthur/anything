@@ -14,7 +14,7 @@ echo "deb [signed-by=/etc/apt/keyrings/xanmod-archive-keyring.gpg] http://deb.xa
 sudo apt update -y
 sudo apt upgrade -y
 sudo apt install -y linux-xanmod-lts-x64v3
-sudo apt install -y --no-install-recommends dkms libdw-dev clang lld llvm
+sudo apt install -y dkms libdw-dev clang lld llvm
 sudo apt install -y \
     wget curl ca-certificates gnupg lsb-release \
     git vim nano htop tmux screen \
@@ -91,24 +91,8 @@ export PATH=\$PATH:\$GOPATH/bin
 EOF
 
 curl -LsSf https://astral.sh/uv/install.sh | sh
-export PATH="$HOME/.local/bin:$PATH"
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-
 curl -fsSL https://deno.land/install.sh | sh
-
-
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
-echo 'export DENO_INSTALL="$HOME/.deno"' >> ~/.bashrc
-echo 'export PATH="$DENO_INSTALL/bin:$PATH"' >> ~/.bashrc
-
 curl -fsSL https://bun.sh/install | bash
-
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-echo 'export BUN_INSTALL="$HOME/.bun"' >> ~/.bashrc
-echo 'export PATH="$BUN_INSTALL/bin:$PATH"' >> ~/.bashrc
-
 curl -fsSL https://get.pnpm.io/install.sh | sh -
 
 sudo apt install -y nginx
