@@ -7,13 +7,8 @@ set -e
 # ==============================
 
 echo "Starting Debian 13 Trixie Setup..."
-
-echo "📦 Installing XanMod Kernel..."
-wget -qO - https://dl.xanmod.org/archive.key | sudo gpg --dearmor -vo /etc/apt/keyrings/xanmod-archive-keyring.gpg
-echo "deb [signed-by=/etc/apt/keyrings/xanmod-archive-keyring.gpg] http://deb.xanmod.org $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/xanmod-release.list
 sudo apt update -y
 sudo apt upgrade -y
-sudo apt install -y linux-xanmod-lts-x64v3
 sudo apt install -y dkms libdw-dev clang lld llvm
 sudo apt install -y \
     wget curl ca-certificates gnupg lsb-release \
@@ -48,6 +43,13 @@ sudo apt install -y sqlite3 postgresql-client
 sudo apt install -y rustc cargo
 sudo apt install -y \
     llvm lld clang clang-tools libclang-dev
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+source "$HOME/.cargo/env"
+echo "✅ Rust version: $(rustc --version)"
+sudo wget -O /usr/local/bin/yt-dlp \
+    https://github.com/yt-dlp/yt-dlp-nightly-builds/releases/latest/download/yt-dlp_linux
+sudo chmod +x /usr/local/bin/yt-dlp
+echo "✅ yt-dlp version: $(yt-dlp --version)"
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
@@ -117,28 +119,8 @@ sudo apt install -y \
 sudo apt autoremove -y
 sudo apt autoclean -y
 
-echo ""
 echo "============================================"
 echo " SETUP COMPLETE!"
 echo "============================================"
-echo ""
-echo "📦 Installed packages:"
-echo "   - XanMod Kernel (Performance)"
-echo "   - Python 3.13 + uv"
-echo "   - Node.js 24 LTS (NVM)"
-echo "   - Docker & Docker Compose"
-echo "   - Go 1.23.4"
-echo "   - Deno (Modern JS/TS)"
-echo "   - Bun (Fast JS Runtime)"
-echo "   - pnpm (Fast Package Manager)"
-echo "   - Rust & Cargo"
-echo "   - Nginx"
-echo "   - Redis"
-echo "   - PM2"
-echo "   - FFmpeg & Media tools"
-echo "   - Build tools (GCC, Clang, LLVM)"
-echo "   - Security tools (fail2ban, ufw)"
-echo ""
-echo ""
 echo "🎉 DORRRRRRRRRRRRRRRRRRR by Arthur!"
 echo "============================================"
